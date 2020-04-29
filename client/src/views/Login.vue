@@ -6,7 +6,7 @@
 export default {
   name: 'login',
   components: {},
-}
+};
 </script>
 
 <style>
