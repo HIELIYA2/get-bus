@@ -1,0 +1,14 @@
+* {
+  letter-spacing: 0.6px;
+  box-sizing: border-box;
+  color: black;
+  a {
+    color: black;
+    &:link {
+      text-decoration: none;
+    }
+    &:hover {
+      color: black;
+    }
+  }
+}
