@@ -3,7 +3,7 @@
     <video autoplay muted loop class="home-video">
       <source src="../assets/video/2.mp4" type="video/mp4" />
     </video>
-    <div class="hhh">Worldwide Corporate Ground Travel</div>
+    <div class="hhh">Statewide Corporate Ground Travel</div>
   </div>
 </template>
 

@@ -9,15 +9,10 @@
       </router-link>
     </div>
     <div class="navigation">
-      <router-link class="nav-btns" to="/about" title="About">
-        About
-      </router-link>
-      <router-link class="nav-btns" to="/login" title="passenger">
-        Riders
-      </router-link>
-      <router-link class="nav-btns" to="/login" title="driver">
-        Drivers
-      </router-link>
+      <router-link class="nav-btns" to="/about" title="About">About</router-link>
+      <router-link class="nav-btns" to="/login" title="passenger">Riders</router-link>
+      <router-link class="nav-btns" to="/login" title="driver">Drivers</router-link>
+      <router-link class="nav-btns" to="/route" title="driver">Route</router-link>
     </div>
   </section>
 </template>
