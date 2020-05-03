@@ -5,6 +5,7 @@ import About from '../views/About.vue';
 import Login from '../views/Login.vue';
 import SignUp from '../views/SignUp.vue';
 import Route from '../views/Route.vue';
+import PrivateArea from '../views/PrivateArea.vue';
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,16 @@ const routes = [
     path: '/route',
     name: 'route',
     component: Route,
+  },
+  {
+    path: '/route',
+    name: 'route',
+    component: Route,
+  },
+  {
+    path: '/private',
+    name: 'private',
+    component: PrivateArea,
   },
 ];
 
