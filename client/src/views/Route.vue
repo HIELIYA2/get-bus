@@ -78,10 +78,14 @@ export default {
 <style lang="scss" scoped>
 .route {
   margin-top: 96px;
-  min-height: 100vh;
+  min-height: calc(100vh - 96px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .form-route {
     display: flex;
     flex-direction: column;
+    align-items: center;
     .route-size,
     .route-trip-start,
     .route-trip-end,
@@ -98,6 +102,9 @@ export default {
       background-color: rgba(61, 61, 61, 0.274);
       margin: 7px 0;
       border-radius: 50px;
+    }
+    .route-submit {
+      cursor: pointer;
     }
   }
 }
