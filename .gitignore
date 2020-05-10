@@ -22,3 +22,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+*.docx
+~WRL2923.tmp
