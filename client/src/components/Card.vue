@@ -1,5 +1,5 @@
 <template>
-  <section class="card">
+  <section class="card" @click="Order(card)">
     <header class="header"></header>
 
     <main class="main">
@@ -18,6 +18,11 @@ export default {
     return {};
   },
   components: {},
+  methods: {
+    Order(card) {
+      console.log('peek order', card);
+    },
+  },
 };
 </script>
 
