@@ -1,7 +1,7 @@
 <template>
   <div class="private">
     <board class="board" msg="board" />
-    <list class="list" msg="list" />
+    <list class="list" msg="your orders" />
   </div>
 </template>
 
