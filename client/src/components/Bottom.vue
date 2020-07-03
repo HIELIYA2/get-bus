@@ -1,53 +1,128 @@
 <template>
   <section class="bottom">
-    <header class="header"></header>
-
     <main class="main">
       <div class="details">
-        <h1>{{ msg }}</h1>
+        <div v-if="currUser.type === 'Driver'">
+          <div class="offer-surface" v-if="currOrder">
+            <input
+              class="input-driver"
+              type="price"
+              v-model="offer.price"
+              placeholder="Your proposal"
+            />
+            <button class="send-driver" @click="sendPrice()">Submit</button>
+          </div>
+        </div>
+        <!-- {{ this.orders.length }}?  -->
+        <div v-else>please choose order</div>
+        <div class="rider-cards" v-if="currUser.type === 'Rider'">
+          <div v-for="offer in order.offers" :key="offer" class="offer">
+            <offer class="offer" :offerID="offer"></offer>
+          </div>
+        </div>
       </div>
     </main>
-
-    <footer class="footer"></footer>
   </section>
 </template>
 
 <script>
+/*
+eslint no-underscore-dangle: ["error", { "allow": ["_id"] }]
+*/
+import offer from './Offer.vue';
+
 export default {
   name: 'Bottom',
   props: {
     msg: String,
   },
   data() {
-    return {};
+    return {
+      offer: {
+        price: null,
+      },
+    };
   },
-  components: {},
+  components: {
+    offer,
+  },
+  computed: {
+    currOrder: {
+      get() {
+        return this.$store.getters.getCurrOrder;
+      },
+    },
+    currUser: {
+      get() {
+        return this.$store.getters.loggedInUser;
+      },
+    },
+    order: {
+      get() {
+        return this.$store.getters.getOrder;
+      },
+      set(order) {
+        this.$store.commit('setOrder', order);
+      },
+    },
+  },
   methods: {
-    newOrder() {
-      console.log(' new order');
+    sendPrice() {
+      this.offer.userID = this.currUser._id;
+      this.offer.orderID = this.currOrder;
+      console.log('this.currOrder', this.currOrder);
+
+      this.$store.dispatch({ type: 'saveOffer', offer: this.offer });
+      // .then(() => {
+      //   this.$router.replace({ path: 'private' });
+      //   const userId = this.$store.getters.loggedInUser._id;
+      //   const orderItem = OrderService.getEmptyOrder();
+      //   this.$store.commit('setOrder', { order: orderItem });
+      //   this.$store.dispatch({ type: 'loadOrders', userId });
+      //   SocketService.send(userId);
+      // });
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.botton {
-  max-height: 100vh;
-  width: 100%;
+.bottom {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  .header {
-  }
   .main {
+    overflow-x: auto;
+    overflow-y: hidden;
     .details {
-      height: 260px;
-      width: 260px;
-      background-color: #fff;
+      width: 45vw;
+      .offer-surface {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .input-driver {
+          background-color: rgb(235, 235, 235);
+          border: none;
+          border-radius: 7px;
+          height: 40px;
+          min-width: 170px;
+          max-width: 45vw;
+          margin-right: 20px;
+        }
+        .send-driver {
+          background-color: rgb(235, 235, 235);
+          border: none;
+          border-radius: 7px;
+          height: 40px;
+          width: 80px;
+        }
+      }
+      .rider-cards {
+        display: flex;
+        flex-direction: row;
+      }
     }
-  }
-  .footer {
   }
 }
 </style>
