@@ -1,5 +1,7 @@
 <template>
   <div class="login">
+    <img src="../assets/imgs/6.png" alt class="login-img" />
+
     <div>
       <form class="form-login" @submit.prevent="login">
         <input
@@ -48,8 +50,13 @@ export default {
           type: 'login',
           user: this.user,
         })
-        .then((user) => {
-          if (user.length) {
+        .then((res) => {
+          const { userName } = JSON.parse(JSON.stringify(res));
+          if (res.type === 'Driver') {
+            console.log('dispach', res);
+            this.$store.dispatch({ type: 'loadAllOrders' });
+          }
+          if (userName.length) {
             this.isWrong = false;
             this.$router.push({ path: '/' });
           } else {
@@ -64,9 +71,18 @@ export default {
 
 <style lang="scss" scoped>
 .login {
-  margin-top: 96px;
+  margin-top: 75px;
   padding: 120px 0;
-  background-color: #fff;
+  .login-img {
+    top: 0;
+    left: 0;
+    z-index: -1;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    filter: brightness(65%);
+  }
   .form-login {
     display: flex;
     flex-direction: column;
@@ -105,11 +121,11 @@ export default {
   .btn-new-acount {
     cursor: pointer;
     transition: 0.3s;
-    background-color: rgba(76, 0, 197, 0.712);
+    background-color: #8dc9fe;
   }
   .btn-login:hover,
   .btn-new-acount:hover {
-    background-color: rgb(76, 0, 197);
+    background-color: #63b3fa;
     color: rgb(255, 255, 255);
   }
   .wrong {
