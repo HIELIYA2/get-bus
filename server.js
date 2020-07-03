@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-server.listen(port, () => console.log(`Example app listening on port ${port}`));
+server.listen(port, () => console.log(`App listening on port ${port}`));
 
 addOfferRoutes(app);
 addOrderRoutes(app);
