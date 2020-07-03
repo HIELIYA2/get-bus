@@ -3,8 +3,7 @@
     <div class="logo">
       <router-link to="/" class="logo1">
         <div>
-          <span class="logo-get">Get</span>
-          <span class="logo-bus">bus</span>
+          <img src="../assets/imgs/8.png" alt="" class="logo-img" />
         </div>
       </router-link>
     </div>
@@ -12,38 +11,79 @@
       <router-link class="nav-btns" to="/about" title="About"
         >About</router-link
       >
-      <router-link class="nav-btns" to="/login" title="passenger"
-        >Riders</router-link
-      >
-      <router-link class="nav-btns" to="/login" title="driver"
-        >Drivers</router-link
-      >
-      <router-link class="nav-btns" to="/route" title="driver"
-        >Route</router-link
-      >
-      <router-link class="nav-btns" to="/private" title="driver"
+      <router-link
+        v-if="this.isUserConnect"
+        class="nav-btns"
+        to="/private"
+        title="driver"
         >Private</router-link
       >
+      <router-link class="nav-btns " to="/login" title="passenger">
+        <div
+          v-if="this.isUserConnect"
+          class="nav-btns nav-log"
+          @click="logout()"
+        >
+          logout
+        </div>
+        <div v-else class="nav-btns nav-log">Login</div>
+      </router-link>
+      <div v-if="this.isUserConnect">
+        <!-- <router-link class="nav-btns" to="/route" title="driver">Route</router-link> -->
+      </div>
     </div>
   </section>
 </template>
 
 <script>
+/*
+eslint no-underscore-dangle: ["error", { "allow": ["_id"] }]
+*/
 export default {
   name: 'NavigationBar',
-  created() {},
-  computed: {},
-  methods: {},
+  data() {
+    return {
+      userConnect: false,
+    };
+  },
+
+  computed: {
+    isUserConnect() {
+      return this.$store.getters.isUserLoggedIn;
+    },
+    user: {
+      get() {
+        return this.$store.getters.loggedInUser;
+      },
+      set(user) {
+        this.$store.commit('setUser', user);
+      },
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch({
+        type: 'logout',
+        userId: this.user._id,
+      });
+      this.$store.dispatch({
+        type: 'resetOrder',
+        isReset: true,
+      });
+      this.userConnect = false;
+    },
+  },
+  watch: {},
   components: {},
 };
 </script>
 
 <style lang="scss" scoped>
 .navigation-bar {
-  background: rgba(255, 255, 255, 0.829);
+  background: rgba(0, 0, 0, 0.705);
   position: fixed;
   width: 100%;
-  height: 96px;
+  height: 75px;
   top: 0;
   padding: 4px 20px;
   display: flex;
@@ -51,33 +91,31 @@ export default {
   justify-content: space-between;
   align-items: center;
   z-index: 10;
-}
-.logo {
-  .logo1 {
-    font-size: 30px;
-    .logo-get {
-      color: rgb(76, 0, 197);
-      font-family: Raleway-Regular;
-    }
-    .logo-bus {
-      color: rgb(24, 24, 24);
-      font-family: Raleway-Regular;
+  .logo {
+    .logo1 {
+      .logo-img {
+        height: 150px;
+      }
     }
   }
-}
-.navigation {
-  display: flex;
-  align-items: center;
-  .nav-btns {
-    font-size: 22px;
-    border-radius: 4px;
-    padding: 5px;
-    margin-right: 3px;
-    min-width: 37px;
-    transition: 0.2s;
-    color: rgb(76, 0, 197);
-    &:hover {
-      color: rgb(31, 0, 82);
+  .navigation {
+    display: flex;
+    align-items: center;
+    .nav-btns {
+      font-size: 22px;
+      border-radius: 4px;
+      padding: 5px;
+      margin-right: 3px;
+      min-width: 37px;
+      transition: 0.2s;
+      color: rgba(86, 180, 201, 0.781);
+      &:hover {
+        color: rgb(86, 180, 201);
+      }
+      .nav-log {
+        padding: 7px;
+        border: 1px rgba(77, 156, 174, 0.781) solid;
+      }
     }
   }
 }
