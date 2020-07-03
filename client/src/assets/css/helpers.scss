@@ -4,14 +4,7 @@
   font-family: Raleway-Regular;
   src: url(../fonts/Raleway-Regular.ttf);
 }
-@font-face {
-  font-family: LeckerliOne-Regular;
-  src: url(../fonts/LeckerliOne-Regular.ttf);
-}
-@font-face {
-  font-family: BerkshireSwash-Regular;
-  src: url(../fonts/BerkshireSwash-Regular.ttf);
-}
+
 @font-face {
   font-family: Lato_bold;
   src: url(../fonts/Lato_Bold.ttf);
@@ -20,10 +13,7 @@
   font-family: Lato_regular;
   src: url(../fonts/Lato_Regular.ttf);
 }
-@font-face {
-  font-family: EmilysCandy;
-  src: url(../fonts/EmilysCandy-Regular.ttf);
-}
+
 @font-face {
   font-family: PontanoSans-Regular;
   src: url(../fonts/PontanoSans-Regular.ttf);
@@ -74,22 +64,24 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 3px;
+  height: 3px;
+  display: block;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgb(187, 187, 187);
+  background: rgb(20, 20, 20);
   border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(76, 0, 197);
+  background: rgb(77, 156, 174);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(172, 172, 172);
+  background: rgb(43, 87, 97);
 }
