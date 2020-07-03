@@ -1,6 +1,27 @@
 <template>
   <div class="sign-up">
+    <img src="../assets/imgs/6.png" alt class="sign-up-img" />
+
     <form class="form-sign-up" @submit.prevent="submit">
+      <div class="up-in-toggle">
+        <input
+          type="radio"
+          id="switch_left"
+          name="switch_2"
+          value="Rider"
+          v-model="user.type"
+          checked
+        />
+        <label for="switch_left">Rider</label>
+        <input
+          type="radio"
+          id="switch_right"
+          name="switch_2"
+          v-model="user.type"
+          value="Driver"
+        />
+        <label for="switch_right">Driver</label>
+      </div>
       <input
         class="first-name-sign-up"
         v-model="user.firstName"
@@ -44,12 +65,13 @@ export default {
   data() {
     return {
       user: {
+        type: 'Rider',
         firstName: '',
         lastName: '',
         userName: '',
         password: '',
         email: '',
-        prefs: { userPic: null, bgColor: '#ffffff', color: '#000000' },
+        stock: [],
       },
       isWorng: false,
       isWrongEmail: false,
@@ -61,7 +83,8 @@ export default {
       this.isWrongEmail = !this.reg.test(this.user.email);
     },
     submit() {
-      if (this.isWrongEmail) {
+      console.log(this.user);
+      if (!this.isWrongEmail) {
         this.$store
           .dispatch({
             type: 'signup',
@@ -85,6 +108,16 @@ export default {
 <style lang="scss" scoped>
 .sign-up {
   margin-top: calc(50vh - 170px);
+  .sign-up-img {
+    top: 0;
+    left: 0;
+    z-index: -1;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    filter: brightness(65%);
+  }
   .sign-up-img {
     top: 0;
     left: 0;
@@ -127,14 +160,59 @@ export default {
   .btn-sign-up {
     cursor: pointer;
     transition: 0.3s;
-    background-color: rgba(76, 0, 197, 0.712);
+    background-color: #8dc9fe;
   }
   .btn-sign-up:hover {
-    background-color: rgb(76, 0, 197);
+    background-color: #63b3fa;
     color: rgb(255, 255, 255);
   }
   .wrong {
     border: 2px solid red;
   }
+}
+
+.up-in-toggle {
+  padding: 7px 0;
+  input {
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+    &:checked + label {
+      background: rgb(139, 200, 254);
+      background: linear-gradient(
+        0deg,
+        rgb(139, 200, 254) 0%,
+        rgba(139, 200, 254, 1) 100%
+      );
+      color: white;
+      font-weight: 500;
+      box-shadow: 0 7px 20px rgba(0, 0, 0, 0.09), 0 6px 6px rgba(0, 0, 0, 0.13);
+    }
+  }
+  label {
+    display: inline-block;
+    width: 100px;
+    background-color: rgb(73, 90, 111);
+    color: rgb(165, 173, 183);
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.8rem;
+    padding: 6px 6px;
+    float: left;
+    transition: all 0.1s ease-in-out;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.up-in-toggle label:first-of-type {
+  border-radius: 15.5px 0 0 15.5px;
+}
+
+.up-in-toggle label:last-of-type {
+  border-radius: 0 15.5px 15.5px 0;
 }
 </style>
