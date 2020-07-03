@@ -1,19 +1,31 @@
 <template>
   <div class="private">
-    <board class="board" msg="board" />
-    <list class="list" msg="your orders" />
+    <!-- <video autoplay muted loop class="pa-img">
+      <source src="../assets/imgs/10.mp4" type="video/mp4" />
+    </video> -->
+    <img src="../assets/imgs/6.jpg" alt="" class="pa-img" />
+
+    <board class="board" :user="this.user" />
   </div>
 </template>
 
 <script>
 import board from '@/components/Board.vue';
-import list from '@/components/List.vue';
 
 export default {
   name: 'Private',
   components: {
     board,
-    list,
+  },
+  computed: {
+    user: {
+      get() {
+        return this.$store.getters.loggedInUser;
+      },
+      set(user) {
+        this.$store.commit('setUser', user);
+      },
+    },
   },
   data() {
     return {
@@ -31,15 +43,16 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  .board {
-    min-height: 75vh;
-    width: 60%;
-    background-color: rgba(39, 0, 78, 0.329);
-  }
-  .list {
-    width: 25vw;
-    min-height: 75vh;
-    background-color: rgba(107, 51, 153, 0.274);
+
+  .pa-img {
+    top: 0;
+    left: 0;
+    z-index: -1;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    // filter: brightness(50%);
   }
 }
 </style>
