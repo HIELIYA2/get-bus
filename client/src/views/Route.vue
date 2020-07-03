@@ -1,15 +1,17 @@
 <template>
   <div class="route">
-    <form class="form-route" @submit.prevent="submit">
+    <img src="../assets/imgs/6.png" alt class="route-img" />
+
+    <form class="form-route" @submit.prevent.stop="addOrder">
       <input
         class="route-size"
-        v-model="plan.size"
+        v-model="order.size"
         placeholder="size"
         required
       />
       <input
         class="route-trip-start"
-        v-model="plan.tripStart"
+        v-model="order.datestart"
         type="date"
         name="trip-start"
         required
@@ -17,7 +19,7 @@
       <input
         id="searchTextField"
         class="route-trip-end"
-        v-model="plan.tripEnd"
+        v-model="order.dateEnd"
         type="date"
         name="trip-end"
         required
@@ -29,7 +31,7 @@
         size="50"
         placeholder="Enter a position-start"
         autocomplete="on"
-        v-model="plan.positionStart"
+        v-model="order.positionStart"
         runat="server"
         required
       />
@@ -43,7 +45,7 @@
         type="text"
         size="50"
         placeholder="Enter a position-end"
-        v-model="plan.positionEnd"
+        v-model="order.positionEnd"
         autocomplete="on"
         runat="server"
         required
@@ -58,19 +60,58 @@
 </template>
 
 <script>
+/*
+eslint no-underscore-dangle: ["error", { "allow": ["_id"] }]
+*/
+import OrderService from '../../services/OrderService';
+
 export default {
   name: 'Route',
   data() {
     return {
-      plan: {
+      order: {
+        title: '',
+        description: '',
         size: null,
-        tripStart: '',
-        tripEnd: '',
+        datestart: null,
+        dateEnd: null,
         positionStart: '',
         positionEnd: '',
-        return: false,
+        offerChose: null,
+        offers: [],
+        uid: this.$store.getters.loggedInUser._id,
       },
     };
+  },
+  methods: {
+    addOrder() {
+      this.$store
+        .dispatch({ type: 'saveOrder', order: this.order })
+        .then(() => {
+          this.$router.replace({ path: 'private' });
+          const userId = this.$store.getters.loggedInUser._id;
+          const orderItem = OrderService.getEmptyOrder();
+          this.$store.commit('setOrder', { order: orderItem });
+          this.$store.dispatch({ type: 'loadOrders', userId });
+          // SocketService.send(userId);
+        });
+    },
+  },
+  user: {
+    get() {
+      return this.$store.getters.loggedInUser;
+    },
+    set(user) {
+      this.$store.commit('setUser', user);
+    },
+  },
+  order: {
+    get() {
+      return this.$store.getters.getCurrCard;
+    },
+    set(item) {
+      this.$store.commit('setCurrOrder', { order: item });
+    },
   },
 };
 </script>
@@ -82,6 +123,16 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  .route-img {
+    top: 0;
+    left: 0;
+    z-index: -1;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    filter: brightness(65%);
+  }
   .form-route {
     display: flex;
     flex-direction: column;
