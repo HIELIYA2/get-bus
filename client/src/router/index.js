@@ -36,11 +36,6 @@ const routes = [
     component: Route,
   },
   {
-    path: '/route',
-    name: 'route',
-    component: Route,
-  },
-  {
     path: '/private',
     name: 'private',
     component: PrivateArea,
