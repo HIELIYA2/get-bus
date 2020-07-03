@@ -1,65 +1,49 @@
 <template>
-  <div class="board">
-    <header class="header">
-      <h1>{{ msg }}</h1>
-    </header>
-
+  <div class="board" v-if="user._id">
     <main class="main">
-      <mapq msg="map"></mapq>
-      <information msg="information"></information>
+      <list class="list" :user="this.user" />
+      <information
+        class="information"
+        msg="information"
+        :user="this.user"
+      ></information>
+      <!-- <bottom class="bottom" msg="bottom"></bottom> -->
     </main>
-
-    <footer class="footer">
-      <bottom msg="bottom"></bottom>
-    </footer>
   </div>
 </template>
 
 <script>
+import list from '@/components/List.vue';
 import information from './Information.vue';
-import mapq from './Map.vue';
 import bottom from './Bottom.vue';
 
 export default {
   name: 'Board',
   props: {
-    msg: String,
+    user: Object,
   },
   components: {
     information,
-    mapq,
     bottom,
+    list,
   },
+  computed: {},
 };
 </script>
 
-
 <style lang="scss" scoped>
 .board {
+  background-color: rgba(206, 206, 206, 0.541);
   align-items: center;
   flex-direction: column;
+  padding: 30px 40px;
+  border-radius: 7px;
+  font-family: Raleway-Regular;
 
-  .header {
-    margin: 15px 0;
-  }
   .main {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    .map {
-    }
-    .information {
-    }
-  }
-  .footer {
-    margin: 15px 0;
-    display: flex;
     justify-content: center;
-    .bottom {
-      width: 600px;
-      height: 140px;
-      background-color: #fff;
-    }
   }
 }
 </style>
