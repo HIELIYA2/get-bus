@@ -1,16 +1,12 @@
 <template>
   <section class="list">
-    <header class="header">
-      <h1>{{ msg }}</h1>
-    </header>
-
+    <header class="header">{{ this.user.firstName }}'s orders</header>
     <main class="main items">
-      <div v-for="card in list" :key="card._id" class="card">
+      <div v-for="card in orders" :key="card._id" class="cards">
         <card class="card" :card="card"></card>
       </div>
     </main>
-
-    <footer class="footer">
+    <footer class="footer" v-if="user.type === 'Rider'">
       <button class="list-add-order" @click="newOrder()">
         Add order
         <i class="fa fa-plus"></i>
@@ -20,25 +16,39 @@
 </template>
 
 <script>
+/*
+eslint no-underscore-dangle: ["error", { "allow": ["_id"] }]
+*/
 import card from '@/components/Card.vue';
 
 export default {
   name: 'List',
   props: {
-    msg: String,
+    user: Object,
   },
   data() {
-    return {
-      list: ['null', 'pop', 'lol', 'kok', 'hoh', 'mom', 'bob'],
-      // list: ['null', 'pop', 'lol'],
-    };
+    return {};
   },
   components: {
     card,
   },
+  computed: {
+    orders: {
+      get() {
+        if (this.user.type === 'Driver') {
+          return this.$store.getters.getAllOrders.map((o) => o._id);
+        }
+        return this.$store.getters.getOrders;
+      },
+      set(order) {
+        this.$store.commit('setOrder', order);
+      },
+    },
+  },
+  watch: {},
   methods: {
     newOrder() {
-      console.log(' new order');
+      this.$router.replace('/route');
     },
   },
 };
@@ -47,38 +57,46 @@ export default {
 <style lang="scss" scoped>
 .list {
   max-height: 100vh;
-  width: 100%;
+  width: 25vw;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  margin-right: 20px;
+
   .header {
-    margin: 10px 0;
+    font-weight: bold;
+    color: rgb(29, 58, 65);
+    font-size: 22px;
+    padding: 10px 0;
   }
   .main {
     height: 50vh;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
   }
   .footer {
     margin: 10px 0;
     max-height: 200px;
     .list-add-order {
       padding: 10px 0;
-      width: 270px;
+      width: 25vw;
       height: 40px;
-      background-color: rgba(255, 255, 255, 0);
-      border: none;
+      background-color: rgb(235, 235, 235);
       font-size: 20px;
-      color: rgb(82, 82, 82);
+      color: rgb(77, 156, 174);
       border-radius: 7px;
-      border: rgb(0, 0, 0) 1px solid;
+      border: none;
+      box-shadow: 0px 0px 2px 1px rgb(95, 195, 218);
       transition: 0.3s;
       cursor: pointer;
       &:hover {
-        color: rgb(0, 0, 0);
+        box-shadow: 0px 0px 3px 2px rgb(95, 195, 218);
       }
       .fa-plus {
-        color: rgb(48, 47, 47);
+        color: rgba(77, 156, 174, 0.747);
       }
     }
   }
