@@ -1,26 +1,32 @@
 <template>
   <section class="offer" @click="clickOffer(offer)">
-    <header class="header"></header>
-
     <main class="main">
       <div class="title-offer">{{ offer.price }}</div>
     </main>
-
-    <footer class="footer"></footer>
+    <modal
+      v-if="modal"
+      @closeModal="modalCl"
+      :details="details"
+      :offer="offer"
+    ></modal>
   </section>
 </template>
 
 <script>
+import modal from './Modal.vue';
+
 export default {
   name: 'Offer',
   props: ['offerID'],
   data() {
     return {
+      modal: false,
       offer: [],
+      details: [],
     };
   },
 
-  components: {},
+  components: { modal },
   created() {
     const offerId = this.offerID;
     this.$store.dispatch({ type: 'loadOffer', offerId }).then((res) => {
@@ -29,12 +35,19 @@ export default {
   },
 
   methods: {
+    modalCl() {
+      console.log('close modal');
+      this.modal = false;
+    },
     clickOffer(offerId) {
-      console.log('peek offer', offerId);
-      // this.$store.commit('setCurrOrder', { order: orderId });
-      // this.$store.dispatch({ type: 'loadOrder', orderId }).then((res) => {
-      //   this.order = res;
-      // });
+      console.log('modal', this.modal);
+      this.modal = true;
+      const offer = JSON.parse(JSON.stringify(offerId));
+      const { userID } = offer;
+      console.log('peek offer', userID);
+      this.$store.dispatch({ type: 'loadUser', userId: userID }).then((res) => {
+        this.details = JSON.parse(JSON.stringify(res));
+      });
     },
   },
 };
