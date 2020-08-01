@@ -20,8 +20,10 @@ function removeOrder(orderId) {
 }
 
 function saveOrder(order) {
-  if (order.id) {
-    return HttpService.put(`${ORDER_URL}/${order.id}`, order).then(resolveData);
+  if (order._id) {
+    return HttpService.put(`${ORDER_URL}/${order._id}`, order).then(
+      resolveData,
+    );
   }
   return HttpService.post(ORDER_URL, order).then(resolveData);
 }
