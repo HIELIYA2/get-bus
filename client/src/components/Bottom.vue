@@ -12,14 +12,17 @@
             />
             <button class="send-driver" @click="sendPrice()">Submit</button>
           </div>
+          <div v-else>please choose order</div>
         </div>
-        <!-- {{ this.orders.length }}?  -->
-        <div v-else>please choose order</div>
-        <div class="rider-cards" v-if="currUser.type === 'Rider'">
+        <div
+          class="rider-cards"
+          v-if="currUser.type === 'Rider' && order.offers.length"
+        >
           <div v-for="offer in order.offers" :key="offer" class="offer">
             <offer class="offer" :offerID="offer"></offer>
           </div>
         </div>
+        <div v-else>You haven't received any offers yet</div>
       </div>
     </main>
   </section>
