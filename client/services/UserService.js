@@ -7,8 +7,7 @@ const USER_URL = HttpService.getUrl('user');
 const resolveData = (res) => res.data;
 
 function getUserById(userId) {
-  console.log('getUserById');
-
+  console.log('getUserById', userId);
   return HttpService.get(`${USER_URL}/${userId}`).then(resolveData);
 }
 function getUserAndOrders(userId) {

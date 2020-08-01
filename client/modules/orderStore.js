@@ -39,6 +39,7 @@ export default {
         return res;
       });
     },
+
     resetOrder(context, { isReset }) {
       if (isReset) {
         context.commit({ type: 'resetState' });

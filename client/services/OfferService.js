@@ -21,7 +21,6 @@ function removeOffer(offerId) {
 
 function saveOffer(offer) {
   console.log('offer service ', offer);
-
   if (offer.id) {
     return HttpService.put(`${OFFER_URL}/${offer.id}`, offer).then(resolveData);
   }
