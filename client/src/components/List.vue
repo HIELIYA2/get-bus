@@ -57,6 +57,7 @@ export default {
 <style lang="scss" scoped>
 .list {
   max-height: 100vh;
+  padding: 3px;
   width: 25vw;
   display: flex;
   justify-content: flex-start;
@@ -75,7 +76,7 @@ export default {
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    overflow-y: hidden;
+    overflow-y: auto;
   }
   .footer {
     margin: 10px 0;
