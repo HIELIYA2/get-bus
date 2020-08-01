@@ -5,6 +5,12 @@
     <form class="form-route" @submit.prevent.stop="addOrder">
       <input
         class="route-size"
+        v-model="order.title"
+        placeholder="Name for the trip"
+        required
+      />
+      <input
+        class="route-size"
         v-model="order.size"
         placeholder="size"
         required
