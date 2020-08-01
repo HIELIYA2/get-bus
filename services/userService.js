@@ -40,9 +40,19 @@ function addOfferID(offer, offerId) {
   });
 }
 
+// function getUserById(userId) {
+//   const _id = new ObjectId(userId);
+//   return mongoService.connect().then((db) => {
+//     return db.collection(USERS_DB).findOne({ _id });
+//   });
+// }
+
 function getUserById(userId) {
-  const _id = new ObjectId(userId);
-  return _id;
+  userId = new ObjectId(userId.userId);
+  return mongoService.connect().then((db) => {
+    const collection = db.collection(USERS_DB);
+    return collection.findOne({ _id: userId });
+  });
 }
 
 function removeUser(userId) {

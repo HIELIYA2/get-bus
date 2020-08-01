@@ -31,7 +31,7 @@ function addOrdersRoutes(app) {
   // UPDATE
   app.put(`${ORDER_URL}/:orderId`, (req, res) => {
     const order = req.body;
-    delete order.users;
+    // delete order.users;
     orderService.updateOrder(order).then((order) => res.json(order));
   });
 }
