@@ -1,18 +1,20 @@
 <template>
-  <section class="card" @click="clickOrder(card)">
-    <header class="header"></header>
-
-    <main class="main">
-      <div class="title-card">size: {{ order.size }}{{ card.size }}</div>
+  <section
+    @mouseleave="cardOver = false"
+    @mouseover="cardOver = true"
+    class="card"
+    @click="clickOrder(card)"
+  >
+    <main class="main" v-if="cardOver">
       <div class="title-card">
-        from: {{ order.positionStart }}{{ card.positionStart }}
-      </div>
-      <div class="title-card">
-        to: {{ order.positionEnd }}{{ card.positionEnd }}
+        <div>passengers {{ order.size }}{{ card.size }}</div>
+        <div>from: {{ order.positionStart }}{{ card.positionStart }}</div>
+        <div>to: {{ order.positionEnd }}{{ card.positionEnd }}</div>
       </div>
     </main>
-
-    <footer class="footer"></footer>
+    <main class="main" v-if="!cardOver">
+      <div class="title-card">{{ order.title }}{{ card.title }}</div>
+    </main>
   </section>
 </template>
 
@@ -23,6 +25,7 @@ export default {
   data() {
     return {
       order: [],
+      cardOver: false,
     };
   },
 
@@ -61,14 +64,18 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  transition: 0.2s;
   cursor: pointer;
   &:hover {
     background-color: rgb(255, 255, 255);
   }
   .main {
     .title-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       color: rgb(49, 49, 49);
+      padding: 2px 0;
     }
   }
 }
