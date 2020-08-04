@@ -28,22 +28,21 @@ export default {
   },
   actions: {
     updateUser(context, { userId, orders }) {
-      return UserService.getUserAndOrder(userId).then((res) => {
-        context.commit({ type: 'setUser', user: res });
+      return UserService.getUserAndOrders(userId).then((res) => {
+        context.commit({ type: 'setUser', user: res.user });
         context.commit({ type: 'setOrders', orders });
       });
     },
     async loadUser(context, { userId }) {
       return UserService.getUserById(userId).then((res) => {
-        console.log('loadUser', res);
         return res;
       });
     },
-    login(context, { user }) {
-      return UserService.login(user).then((res) => {
-        if (user) {
-          const x = JSON.parse(JSON.stringify(res));
-          context.commit({ type: 'setUser', user: x });
+    login(context, data) {
+      return UserService.login(data.user).then((res) => {
+        if (res) {
+          const user = res;
+          context.commit({ type: 'setUser', user });
         }
         return res;
       });
@@ -52,11 +51,11 @@ export default {
       context.commit({ type: 'logout', userId });
     },
     signup(context, { user }) {
-      return UserService.signup(user).then(() => {
-        if (user) {
-          context.commit({ type: 'setUser', user: user[0] });
+      return UserService.signup(user).then((res) => {
+        if (res) {
+          context.commit({ type: 'setUser', user: res });
         }
-        return user;
+        return res;
       });
     },
   },
