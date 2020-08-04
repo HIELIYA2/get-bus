@@ -80,7 +80,9 @@ export default {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
-    filter: brightness(50%);
+    filter: brightness(85%);
+    filter: contrast(80%);
+    filter: grayscale(50%);
   }
   .login-options {
     margin-top: 95px;
@@ -91,8 +93,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
-    background-color: rgba(187, 187, 187, 0.315);
+    align-items: center;
+    background-color: rgba(202, 202, 202, 0.603);
+    border-radius: 4%;
     .form-login {
       display: flex;
       flex-direction: column;
@@ -109,9 +112,9 @@ export default {
       height: 50px;
       border: 0px solid rgb(31, 31, 31);
       color: rgb(255, 255, 255);
-      background-color: rgba(61, 61, 61, 0.274);
+      background-color: rgba(42, 42, 42, 0.473);
       margin: 7px 0;
-      border-radius: 50px;
+      border-radius: 10px;
     }
     .username-login::placeholder,
     .password-login::placeholder {
@@ -139,9 +142,6 @@ export default {
     }
     .wrong {
       border: 2px solid red;
-    }
-    .login-creat {
-      display: flex;
     }
   }
 }

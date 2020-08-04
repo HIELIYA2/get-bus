@@ -107,7 +107,6 @@ export default {
 
 <style lang="scss" scoped>
 .sign-up {
-  // margin-top: calc(50vh - 170px);
   .sign-up-img {
     top: 0;
     left: 0;
@@ -120,15 +119,6 @@ export default {
     filter: contrast(80%);
     filter: grayscale(50%);
   }
-  .sign-up-img {
-    top: 0;
-    left: 0;
-    z-index: -1;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-  }
   .form-sign-up {
     margin-top: 95px;
     width: fit-content;
@@ -139,7 +129,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(209, 207, 207, 0.356);
+    background-color: rgba(202, 202, 202, 0.603);
     border-radius: 4%;
     .up-in-toggle {
       padding: 10px 0;
