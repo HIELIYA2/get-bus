@@ -3,34 +3,17 @@
     <div class="logo">
       <router-link to="/" class="logo1">
         <div>
-          <img src="../assets/imgs/8.png" alt="" class="logo-img" />
+          <img src="../assets/imgs/8.png" alt class="logo-img" />
         </div>
       </router-link>
     </div>
     <div class="navigation">
-      <router-link class="nav-btns" to="/about" title="About"
-        >About</router-link
-      >
-      <router-link
-        v-if="this.isUserConnect"
-        class="nav-btns"
-        to="/private"
-        title="driver"
-        >Private</router-link
-      >
-      <router-link class="nav-btns " to="/login" title="passenger">
-        <div
-          v-if="this.isUserConnect"
-          class="nav-btns nav-log"
-          @click="logout()"
-        >
-          logout
-        </div>
+      <router-link class="nav-btns" to="/about" title="About">About</router-link>
+      <router-link v-if="user && user._id" class="nav-btns" to="/private" title="driver">Private</router-link>
+      <router-link class="nav-btns" to="/login">
+        <div v-if="user && user._id" class="nav-btns nav-log" @click="logout()">logout</div>
         <div v-else class="nav-btns nav-log">Login</div>
       </router-link>
-      <div v-if="this.isUserConnect">
-        <!-- <router-link class="nav-btns" to="/route" title="driver">Route</router-link> -->
-      </div>
     </div>
   </section>
 </template>
@@ -42,24 +25,22 @@ eslint no-underscore-dangle: ["error", { "allow": ["_id"] }]
 export default {
   name: 'NavigationBar',
   data() {
-    return {
-      userConnect: false,
-    };
+    return {};
   },
-
   computed: {
-    isUserConnect() {
-      return this.$store.getters.isUserLoggedIn;
-    },
     user: {
       get() {
-        return this.$store.getters.loggedInUser;
+        if (this.$store.getters.isUserLoggedIn) {
+          return this.$store.getters.loggedInUser;
+        }
+        return null;
       },
       set(user) {
         this.$store.commit('setUser', user);
       },
     },
   },
+
   methods: {
     logout() {
       this.$store.dispatch({
@@ -70,11 +51,10 @@ export default {
         type: 'resetOrder',
         isReset: true,
       });
-      this.userConnect = false;
     },
   },
-  watch: {},
   components: {},
+  watch: {},
 };
 </script>
 
