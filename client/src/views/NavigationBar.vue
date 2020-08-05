@@ -8,10 +8,16 @@
       </router-link>
     </div>
     <div class="navigation">
-      <router-link class="nav-btns" to="/about" title="About">About</router-link>
-      <router-link v-if="user && user._id" class="nav-btns" to="/private" title="driver">Private</router-link>
+      <router-link class="nav-btns" to="/about" title="About"
+        >About</router-link
+      >
+      <router-link v-if="user && user._id" class="nav-btns" to="/private"
+        >Private</router-link
+      >
       <router-link class="nav-btns" to="/login">
-        <div v-if="user && user._id" class="nav-btns nav-log" @click="logout()">logout</div>
+        <div v-if="user && user._id" class="nav-btns nav-log" @click="logout()">
+          logout
+        </div>
         <div v-else class="nav-btns nav-log">Login</div>
       </router-link>
     </div>
