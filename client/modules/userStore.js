@@ -34,9 +34,7 @@ export default {
       });
     },
     async loadUser(context, { userId }) {
-      return UserService.getUserById(userId).then((res) => {
-        return res;
-      });
+      return UserService.getUserById(userId).then((res) => res);
     },
     login(context, data) {
       return UserService.login(data.user).then((res) => {
