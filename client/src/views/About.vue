@@ -13,7 +13,8 @@ export default {
 
 <style lang="scss" scoped>
 .about {
-  margin-top: 96px;
+  padding-top: 75px;
   min-height: 100vh;
+  background-color: rgb(220, 241, 245);
 }
 </style>
