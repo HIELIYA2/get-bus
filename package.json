@@ -4,9 +4,9 @@
   "description": "App for comparing transportion prices",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "start": "node server.js"
+    "build": "node build/build.js"
   },
   "author": "Eliyahu Hillel",
   "license": "ISC",
