@@ -1,5 +1,5 @@
 <template>
-  <section class="navigation-bar">
+  <section v-bind:class="{ navTop: navbarActive }" class="navigation-bar">
     <div class="logo">
       <router-link to="/" class="logo1">
         <div>
@@ -31,7 +31,9 @@ eslint no-underscore-dangle: ["error", { "allow": ["_id"] }]
 export default {
   name: 'NavigationBar',
   data() {
-    return {};
+    return {
+      navbarActive: true,
+    };
   },
   computed: {
     user: {
@@ -58,6 +60,19 @@ export default {
         isReset: true,
       });
     },
+    handleScroll() {
+      if (window.pageYOffset > 80) {
+        this.navbarActive = false;
+      } else {
+        this.navbarActive = true;
+      }
+    },
+  },
+  created() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   components: {},
   watch: {},
@@ -67,7 +82,7 @@ export default {
 <style lang="scss" scoped>
 .navigation-bar {
   font-family: NanumGothic-Regular;
-  background: rgba(0, 0, 0, 0.705);
+  background: rgba(0, 0, 0, 0.945);
   position: fixed;
   width: 100%;
   height: 75px;
@@ -78,6 +93,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   z-index: 10;
+  transition: all 0.4s;
+
   .logo {
     .logo1 {
       .logo-img {
@@ -90,12 +107,13 @@ export default {
     align-items: center;
     .nav-btns {
       font-size: 20px;
+      font-weight: bold;
       border-radius: 4px;
       padding: 5px;
       margin-right: 3px;
       min-width: 37px;
-      transition: 0.3s;
-      color: rgba(86, 180, 201, 0.781);
+      transition: 0.4s;
+      color: rgba(4, 113, 138, 0.781);
       &:hover {
         color: rgb(86, 180, 201);
       }
@@ -107,6 +125,23 @@ export default {
           border-color: rgb(86, 180, 201);
         }
       }
+    }
+  }
+}
+.navTop {
+  padding: 20px 0;
+  background: #35353500;
+  transition: 0.4s;
+}
+
+@media (max-width: 893px) {
+  .nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    .nav-active {
+      display: none;
     }
   }
 }

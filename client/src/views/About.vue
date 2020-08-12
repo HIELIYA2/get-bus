@@ -1,15 +1,14 @@
 <template>
   <div class="about">
     <section class="section-1">
-      <div class="about-caption">
-        <h1 class="about-h1">GETBUS</h1>
-        <h2 class="about-h2">Everywhere</h2>
-        <h3 class="about-p1">
-          With a national network,
-        </h3>
-        <h3 class="about-p2">
-          Next step in the world of transportation
-        </h3>
+      <div class="about-description">
+        <div class="description">Booking a trip</div>
+        <div class="dot"></div>
+        <div class="description">Get offers</div>
+        <div class="dot"></div>
+        <div class="description">Choose a favorite</div>
+        <div class="dot"></div>
+        <div class="description">Travelling</div>
       </div>
       <img src="../assets/imgs/12.png" alt="" class="about-phone" />
     </section>
@@ -26,7 +25,7 @@
         </h3>
       </div>
     </section>
-    <section class="section-3"></section>
+    <!-- <section class="section-3"></section> -->
   </div>
 </template>
 
@@ -48,6 +47,25 @@ export default {
     align-items: center;
     justify-content: space-around;
     height: 100vh;
+    padding-bottom: 60px;
+    .about-description {
+      font-family: OpenSansCondensed-Light;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .description {
+        font-size: 40px;
+        padding-bottom: 25px;
+      }
+      .dot {
+        margin-bottom: 15px;
+        height: 15px;
+        width: 15px;
+        border: darkcyan solid 2px;
+        border-radius: 50px;
+      }
+    }
     .about-phone {
       height: 80vh;
     }
