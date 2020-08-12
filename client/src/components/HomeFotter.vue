@@ -37,7 +37,7 @@
       >
         <img class="icon map" src="../assets/map.svg" alt="map" />
         <div class="description">
-          Easy search
+          Verified location
         </div>
       </div>
       <div
@@ -53,7 +53,7 @@
           alt="placeholder"
         />
         <div class="description">
-          Easy search
+          Exact location
         </div>
       </div>
       <div
@@ -65,7 +65,7 @@
       >
         <img class="icon route" src="../assets/route.svg" alt="route" />
         <div class="description">
-          Easy search
+          Short route
         </div>
       </div>
       <div
@@ -77,7 +77,7 @@
       >
         <img class="icon paper" src="../assets/paper.svg" alt="paper" />
         <div class="description">
-          Easy search
+          Fast and efficient
         </div>
       </div>
     </main>
