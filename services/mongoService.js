@@ -6,7 +6,8 @@ function connectToMongo() {
 
   const dbName = 'get_bus_db';
 
-  const url = 'mongodb://localhost:27017/get_bus_db';
+  const url =
+    'mongodb+srv://dbeliyahu:@UMdh*#*aE8Cbku@cluster0-ixmas.mongodb.net/GET_BUS?retryWrites=true&w=majority';
 
   const client = new MongoClient(url, { useNewUrlParser: true });
 
