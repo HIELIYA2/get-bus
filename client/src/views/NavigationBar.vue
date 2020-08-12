@@ -66,6 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 .navigation-bar {
+  font-family: NanumGothic-Regular;
   background: rgba(0, 0, 0, 0.705);
   position: fixed;
   width: 100%;
@@ -88,19 +89,23 @@ export default {
     display: flex;
     align-items: center;
     .nav-btns {
-      font-size: 22px;
+      font-size: 20px;
       border-radius: 4px;
       padding: 5px;
       margin-right: 3px;
       min-width: 37px;
-      transition: 0.2s;
+      transition: 0.3s;
       color: rgba(86, 180, 201, 0.781);
       &:hover {
         color: rgb(86, 180, 201);
       }
       .nav-log {
-        padding: 7px;
-        border: 1px rgba(77, 156, 174, 0.781) solid;
+        padding: 10px 30px;
+        border-radius: 10px;
+        border: 1.5px rgba(77, 156, 174, 0.781) solid;
+        &:hover {
+          border-color: rgb(86, 180, 201);
+        }
       }
     }
   }
