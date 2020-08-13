@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+const serveStatic = require('serve-static');
+const path = require('path');
+
 const addOfferRoutes = require('./routes/offer-route');
 const addOrderRoutes = require('./routes/order-route');
 const addUserRoutes = require('./routes/user-route');
@@ -18,6 +21,9 @@ app.use(
     credentials: true, // enable set cookie
   })
 );
+
+app.use(serveStatic(path.join(__dirname, 'dist')));
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
