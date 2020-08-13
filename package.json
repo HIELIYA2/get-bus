@@ -4,6 +4,7 @@
   "description": "App for comparing transportion prices",
   "main": "server.js",
   "scripts": {
+    "postinstall": "npm run build",
     "start": "node server.js"
   },
   "author": "Eliyahu Hillel",
@@ -15,6 +16,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "mongodb": "^3.1.1",
+    "serve-static": "^1.14.1",
     "shortid": "^2.2.14",
     "socket.io": "^2.2.0",
     "uws": "^100.0.1"
