@@ -1,3 +1,6 @@
+/*
+eslint no-underscore-dangle: ["error", { "allow": ["_id"] }]
+*/
 import HttpService from './HttpService';
 
 const OFFER_URL = HttpService.getUrl('offer');
@@ -21,9 +24,13 @@ function removeOffer(offerId) {
 
 function saveOffer(offer) {
   console.log('offer service ', offer);
-  if (offer.id) {
-    return HttpService.put(`${OFFER_URL}/${offer.id}`, offer).then(resolveData);
+  if (offer._id) {
+    console.log('puuuuutttt');
+    return HttpService.put(`${OFFER_URL}/${offer._id}`, offer).then(
+      resolveData,
+    );
   }
+  console.log('ppooosssstttt');
   return HttpService.post(OFFER_URL, offer).then(resolveData);
 }
 
