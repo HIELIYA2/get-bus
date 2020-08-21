@@ -29,7 +29,21 @@ export default {
     };
   },
 
-  components: {},
+  computed: {
+    currUser: {
+      get() {
+        return this.$store.getters.loggedInUser;
+      },
+    },
+    order2: {
+      get() {
+        return this.$store.getters.getOrder;
+      },
+      set(order) {
+        this.$store.commit('setOrder', order);
+      },
+    },
+  },
   created() {
     const orderId = this.card;
     this.$store.dispatch({ type: 'loadOrder', orderId }).then((res) => {
@@ -39,10 +53,16 @@ export default {
 
   methods: {
     clickOrder(orderId) {
-      console.log('peek order', orderId);
+      const offerId = this.currUser.stock.filter(
+        (v) => this.order.offers.indexOf(v) !== -1,
+      );
+      this.$store.dispatch({ type: 'loadOffer', offerId }).then((res) => {
+        console.log('this.offer', res);
+      });
       this.$store.commit('setCurrOrder', { order: orderId });
       this.$store.dispatch({ type: 'loadOrder', orderId }).then((res) => {
         this.order = res;
+        console.log('this.order', this.order);
       });
     },
   },
