@@ -7,7 +7,7 @@
             <input
               class="input-driver"
               type="price"
-              v-model="offer.price"
+              v-model="newOffer.price"
               placeholder="Your proposal"
             />
             <button class="send-driver" @click="sendPrice()">Submit</button>
@@ -22,7 +22,9 @@
             <offer class="offer" :offerID="offer"></offer>
           </div>
         </div>
-        <div v-else>You haven't received any offers yet</div>
+        <div v-if="currUser.type === 'Rider' && order.offers.length === 0">
+          You haven't received any offers yet
+        </div>
       </div>
     </main>
   </section>
@@ -41,8 +43,10 @@ export default {
   },
   data() {
     return {
-      offer: {
-        price: null,
+      newOffer: {
+        _id: offer._id,
+        orderID: offer.orderID,
+        userID: offer.userID,
       },
     };
   },
@@ -68,14 +72,19 @@ export default {
         this.$store.commit('setOrder', order);
       },
     },
+    offer: {
+      get() {
+        return this.$store.getters.getOffer;
+      },
+    },
   },
   methods: {
     sendPrice() {
-      this.offer.userID = this.currUser._id;
-      this.offer.orderID = this.currOrder;
-      console.log('this.currOrder', this.currOrder);
-
-      this.$store.dispatch({ type: 'saveOffer', offer: this.offer });
+      console.log(offer);
+      this.newOffer.userID = this.currUser._id;
+      this.newOffer.orderID = this.currOrder;
+      console.log('this.currOrder', this.currOrder, this.newOffer);
+      this.$store.dispatch({ type: 'saveOffer', offer: this.newOffer });
       // .then(() => {
       //   this.$router.replace({ path: 'private' });
       //   const userId = this.$store.getters.loggedInUser._id;
