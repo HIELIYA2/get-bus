@@ -31,7 +31,6 @@ function addOffersRoutes(app) {
   // UPDATE
   app.put(`${OFFER_URL}/:offerId`, (req, res) => {
     const offer = req.body;
-    delete offer.users;
     offerService.updateOffer(offer).then((offer) => res.json(offer));
   });
 }
