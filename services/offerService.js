@@ -40,7 +40,7 @@ function removeOffer(offerId) {
     .then((db) => db.collection(OFFERS_DB).removeOne({ _id }));
 }
 
-function updateCard(order) {
+function updateOffer(offer) {
   const offerId = offer._id;
   offer._id = new ObjectId(offer._id);
   return mongoService
@@ -60,5 +60,5 @@ module.exports = {
   addOffer,
   getOfferById,
   removeOffer,
-  updateCard,
+  updateOffer,
 };
