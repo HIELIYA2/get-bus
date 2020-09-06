@@ -25,12 +25,12 @@ function removeOffer(offerId) {
 function saveOffer(offer) {
   console.log('offer service ', offer);
   if (offer._id) {
-    console.log('puuuuutttt');
+    console.log('puuuuutttt ollllddd');
     return HttpService.put(`${OFFER_URL}/${offer._id}`, offer).then(
       resolveData,
     );
   }
-  console.log('ppooosssstttt');
+  console.log('ppooosssstttt neww one');
   return HttpService.post(OFFER_URL, offer).then(resolveData);
 }
 

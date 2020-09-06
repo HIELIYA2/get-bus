@@ -1,4 +1,6 @@
 import OrderService from '../services/OrderService';
+import userStore from './userStore';
+import offerStore from './offerStore';
 
 export default {
   state: {
@@ -36,6 +38,18 @@ export default {
     async loadOrder(context, { orderId }) {
       return OrderService.getOrderById(orderId).then((res) => {
         context.commit({ type: 'setOrder', order: res });
+        const orderOffers = res.offers;
+        if (orderOffers) {
+          const userOffers = JSON.parse(
+            JSON.stringify(userStore.state.user.stock),
+          );
+          const offerId = userOffers.filter((e) => orderOffers.includes(e));
+          console.log('intersection ', offerId);
+          if (offerId) {
+            console.log('match is: ', offerId);
+            offerStore.actions.loadOffer(offerId);
+          }
+        }
         return res;
       });
     },
