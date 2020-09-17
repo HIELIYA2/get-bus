@@ -45,7 +45,7 @@ export default {
       },
     },
   },
-  watch: {},
+  watchEffect() {},
   methods: {
     newOrder() {
       this.$router.replace('/route');

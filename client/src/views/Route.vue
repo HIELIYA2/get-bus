@@ -95,11 +95,9 @@ export default {
         .dispatch({ type: 'saveOrder', order: this.order })
         .then(() => {
           this.$router.replace({ path: 'private' });
-          const userId = this.$store.getters.loggedInUser._id;
           const orderItem = OrderService.getEmptyOrder();
           this.$store.commit('setOrder', { order: orderItem });
-          this.$store.dispatch({ type: 'loadOrders', userId });
-          // SocketService.send(userId);
+          this.$store.dispatch({ type: 'updateUser', userId: this.user._id });
         });
     },
   },

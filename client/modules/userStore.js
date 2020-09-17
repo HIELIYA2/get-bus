@@ -28,6 +28,7 @@ export default {
   },
   actions: {
     updateUser(context, { userId, orders }) {
+      console.log('update user', userId, orders);
       return UserService.getUserAndOrders(userId).then((res) => {
         context.commit({ type: 'setUser', user: res.user });
         context.commit({ type: 'setOrders', orders });

@@ -31,6 +31,7 @@ export default {
   actions: {
     loadAllOrders(context) {
       return OrderService.getAllOrders().then((res) => {
+        console.log('loadAllOrders', res);
         context.commit({ type: 'setAllOrders', allOrders: res });
         return res;
       });
